@@ -20,14 +20,21 @@ router.post("/register", async (req, res, next) => {
         })
 
         if (user) {
-            res.status(201).json({
-                success: true,
-                data: "User registered to datatbase successfull"
+            // res.status(201).json({
+            //     success: true,
+            //     data: "User registered to datatbase successfull"
+            // })
+            res.status(201).json(user)
+        } else {
+            res.status(401).json({
+                success: false,
+                data: "User Already registered"
             })
         }
+
     } catch (err) {
         console.log(`Error in registering user in auth.js ${err.message}`.red.underline)
-        res.status(400).json({
+        res.status(401).json({
             success: false,
             data: err.message
         })
@@ -59,10 +66,11 @@ router.post("/login", async (req, res, next) => {
 
         // Search for valid user in database via email and password
         if (user) {
-            res.status(201).json({
-                success: true,
-                data: `User Login successfull - ${user}`
-            })
+            // res.status(201).json({
+            //     success: true,
+            //     data: user
+            // })
+            res.status(201).json(user)
         } else {
             res.status(400).json({
                 success: false,
@@ -80,9 +88,6 @@ router.post("/login", async (req, res, next) => {
         })
     }
 })
-
-
-
 
 
 module.exports = router;
