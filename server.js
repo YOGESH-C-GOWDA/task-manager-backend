@@ -2,16 +2,19 @@ const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const colors = require("colors");
-const connectToMongoDB = require("./config/database.js")
+const cors = require("cors");
+const connectToMongoDB = require("./config/database.js");
 
 
 // Load enviroment variable from the .env folder
 dotenv.config({ path: "./config/config.env" });
 
 // Route file
-const tm = require("./routes/taskmanager.js")
-const auth = require("./routes/auth.js")
-const users = require("./routes/users.js")
+const tm = require("./routes/taskmanager.js");
+const auth = require("./routes/auth.js");
+const users = require("./routes/users.js");
+const tasks = require("./routes/tasks.js");
+
 
 
 // Connect to Mongodb
@@ -32,9 +35,12 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', "*");
     next();
 })
+
+app.use(cors());
 app.use("/api/v1/tm", tm);
 app.use("/api/v1/auth", auth);
-app.use("/api/v1", users);
+app.use("/api/v1/users", users);
+app.use("/api/v1/tasks", tasks);
 
 
 
