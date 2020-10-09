@@ -187,34 +187,38 @@ router.delete("/:id", async (req, res, next) => {
 // @desc     Get single tasks by id
 // @route    GET /api/v1/users/:usersid/tasks
 // @access   private by admin
-router.get("/", async (req, res, next) => {
-    try {
 
-        console.log(req.params.usersid);
+// Activate later on requirmnet ok
 
-        const task = await Task.find({ user: req.params.usersid });
 
-        console.log("Task info by id", task);
+// router.get("/", async (req, res, next) => {
+//     try {
 
-        if (task) {
-            res.status(201).json(task)
-            console.log("Tasks from data base", task)
-        } else {
-            res.status(401).json({
-                success: false,
-                data: "No data Found"
-            })
-        }
+//         console.log(req.params.usersid);
 
-    } catch (err) {
-        console.log(`Error findind Tasks from database at auth.js ${err.message}`.red.underline)
-        res.status(401).json({
-            success: false,
-            data: err.message
-        })
-    }
-    next();
-})
+//         const task = await Task.find({ user: req.params.usersid });
+
+//         console.log("Task info by id", task);
+
+//         if (task) {
+//             res.status(201).json(task)
+//             console.log("Tasks from data base", task)
+//         } else {
+//             res.status(401).json({
+//                 success: false,
+//                 data: "No data Found"
+//             })
+//         }
+
+//     } catch (err) {
+//         console.log(`Error findind Tasks from database at auth.js ${err.message}`.red.underline)
+//         res.status(401).json({
+//             success: false,
+//             data: err.message
+//         })
+//     }
+//     next();
+// })
 
 
 module.exports = router;
